@@ -1,9 +1,12 @@
 package org.example;
 
+import javax.xml.transform.Result;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 public class App {
     public static void main(String[] args) {
@@ -63,7 +66,8 @@ public class App {
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("PhoneBook :");
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        for(Map.Entry<PhoneNum, Person> item : phoneBook.entrySet()){
+//        for(Map.Entry<PhoneNum, Person> item : phoneBook.entrySet())
+        for(var item : phoneBook.entrySet()){
             System.out.printf("%15s %10s %10s %20s\n", item.getKey().getPhoneNum(),
                     item.getValue().getName(),
                     item.getValue().getSurname(),
@@ -71,5 +75,16 @@ public class App {
                     );
         }
 
+        System.out.println("USING FOREACH ***************************************************************************");
+        phoneBook.forEach(new BiConsumer<PhoneNum, Person>() {
+            @Override
+            public void accept(PhoneNum phoneNum, Person person) {
+                System.out.println(phoneNum + "==" + person);
+            }
+
+        });
+
+        System.out.println("USING LAMBDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        phoneBook.forEach((k, v) -> System.out.println(k + ":" + v));
     }
 }
