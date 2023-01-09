@@ -79,6 +79,7 @@ public class App {
         phoneBook.forEach(new BiConsumer<PhoneNum, Person>() {
             @Override
             public void accept(PhoneNum phoneNum, Person person) {
+
                 System.out.println(phoneNum + "==" + person);
             }
 
